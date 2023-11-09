@@ -1,0 +1,27 @@
+name: Main CI/CD Pipeline
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Lint with Flake8
+      run: |
+        pip install flake8
+        flake8 .
+
+    - name: Test with Pytest
+      run: |
+        pip install pytest
+        pytest
+
+    # Add additional steps for Docker build and push, deployment, etc.
